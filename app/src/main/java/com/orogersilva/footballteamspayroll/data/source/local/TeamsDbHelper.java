@@ -13,20 +13,18 @@ public class TeamsDbHelper extends SQLiteOpenHelper {
     // region FIELDS
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Teams.sqlite";
 
-    private static final String BOOLEAN_TYPE = "INTEGER";
-    private static final String INTEGER_TYPE = "INTEGER";
-    private static final String REAL_TYPE = "REAL";
-    private static final String TEXT_TYPE = "TEXT";
+    private static final String BOOLEAN_TYPE = " INTEGER";
+    private static final String INTEGER_TYPE = " INTEGER";
+    private static final String REAL_TYPE = " REAL";
+    private static final String TEXT_TYPE = " TEXT";
 
     private static final String COMMA_SEPARATOR = ",";
 
 
     private static final String SQL_CREATE_PLAYER_ENTRIES =
             "CREATE TABLE " + TeamsPersistenceContract.PlayerEntry.TABLE_NAME + " (" +
-                    TeamsPersistenceContract.PlayerEntry._ID + TEXT_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
-                    TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA_SEPARATOR +
+                    TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_ID + INTEGER_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
                     TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEPARATOR +
                     TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_AGE + INTEGER_TYPE + COMMA_SEPARATOR +
                     TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_SALARY + REAL_TYPE +
@@ -37,8 +35,7 @@ public class TeamsDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_SUPPORTER_ENTRIES =
             "CREATE TABLE " + TeamsPersistenceContract.SupporterEntry.TABLE_NAME + " (" +
-                    TeamsPersistenceContract.SupporterEntry._ID + TEXT_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
-                    TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA_SEPARATOR +
+                    TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_ID + INTEGER_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
                     TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEPARATOR +
                     TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_REGISTRATION_ID + TEXT_TYPE + COMMA_SEPARATOR +
                     TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_OVERDUE + BOOLEAN_TYPE +
@@ -49,12 +46,12 @@ public class TeamsDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_TEAM_ENTRIES =
             "CREATE TABLE " + TeamsPersistenceContract.TeamEntry.TABLE_NAME + " (" +
-                    TeamsPersistenceContract.TeamEntry._ID + TEXT_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
-                    TeamsPersistenceContract.TeamEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA_SEPARATOR +
+                    TeamsPersistenceContract.TeamEntry.COLUMN_NAME_ID + INTEGER_TYPE + " PRIMARY KEY" + COMMA_SEPARATOR +
                     TeamsPersistenceContract.TeamEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEPARATOR +
                     TeamsPersistenceContract.TeamEntry.COLUMN_PLAYER_ID + TEXT_TYPE + COMMA_SEPARATOR +
+                    TeamsPersistenceContract.TeamEntry.COLUMN_SUPPORTER_ID + TEXT_TYPE + COMMA_SEPARATOR +
                     " FOREIGN KEY (" + TeamsPersistenceContract.TeamEntry.COLUMN_PLAYER_ID +
-                        ") REFERENCES " + TeamsPersistenceContract.PlayerEntry.TABLE_NAME + "(" + TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_ID + ")" +
+                        ") REFERENCES " + TeamsPersistenceContract.PlayerEntry.TABLE_NAME + "(" + TeamsPersistenceContract.PlayerEntry.COLUMN_NAME_ID + ")" + COMMA_SEPARATOR +
                     " FOREIGN KEY (" + TeamsPersistenceContract.TeamEntry.COLUMN_SUPPORTER_ID +
                         ") REFERENCES " + TeamsPersistenceContract.SupporterEntry.TABLE_NAME + "(" + TeamsPersistenceContract.SupporterEntry.COLUMN_NAME_ID + ")" +
                     ")";
@@ -66,9 +63,9 @@ public class TeamsDbHelper extends SQLiteOpenHelper {
 
     // region CONSTRUCTORS
 
-    public TeamsDbHelper(Context context) {
+    public TeamsDbHelper(Context context, final String databaseName) {
 
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, databaseName, null, DATABASE_VERSION);
     }
 
     // endregion

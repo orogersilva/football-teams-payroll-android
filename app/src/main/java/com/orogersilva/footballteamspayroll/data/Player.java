@@ -8,9 +8,22 @@ public class Player {
 
     // region FIELDS
 
+    private long mId;
     private String mName;
     private int mAge;
     private float mSalary;
+
+    // endregion
+
+    // region CONSTRUCTORS
+
+    public Player(long id, String name, int age, float salary) {
+
+        mId = id;
+        mName = name;
+        mAge = age;
+        mSalary = salary;
+    }
 
     // endregion
 
