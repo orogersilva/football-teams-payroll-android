@@ -22,6 +22,20 @@ allprojects {
     }
 }
 
+ext {
+
+    // SDK and tools
+    buildToolsVersion = '23.0.3'
+    compileSdkVersion = 23
+    minSdkVersion = 15
+    targetSdkVersion = 23
+
+    // Dependencies versions
+    supportLibraryVersion = '23.4.0'
+
+    espressoLibraryVersion = '2.2.2'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
