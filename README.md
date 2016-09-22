@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/orogersilva/football-teams-payroll-android.svg?branch=master)](https://travis-ci.org/orogersilva/football-teams-payroll-android)
+
 Android app to display (just to display, for now) the football teams payrolls.
 
 License
