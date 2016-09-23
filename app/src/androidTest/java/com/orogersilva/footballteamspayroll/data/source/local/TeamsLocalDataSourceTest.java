@@ -11,11 +11,11 @@ import com.orogersilva.footballteamspayroll.data.Player;
 import com.orogersilva.footballteamspayroll.data.Supporter;
 import com.orogersilva.footballteamspayroll.data.Team;
 import com.orogersilva.footballteamspayroll.data.source.TeamsDataSource;
-import com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.PlayerEntry;
-import com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.SupporterEntry;
-import com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.TeamEntry;
-import com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.TeamPlayerSupportEntry;
-import com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.TeamSupporterSupportEntry;
+import com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.PlayerEntry;
+import com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.SupporterEntry;
+import com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.TeamEntry;
+import com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.TeamPlayerSupportEntry;
+import com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.TeamSupporterSupportEntry;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -42,7 +42,7 @@ public class TeamsLocalDataSourceTest {
     private static Context sContext;
 
     private static final String DB_NAME = "TeamsTest.sqlite";
-    private TeamsDbHelper mDbHelper;
+    private DbHelper mDbHelper;
 
     private static TeamsLocalDataSource sTeamsLocalDataSource;
 
@@ -55,13 +55,13 @@ public class TeamsLocalDataSourceTest {
 
         sContext = InstrumentationRegistry.getTargetContext();
 
-        sTeamsLocalDataSource = TeamsLocalDataSource.getInstance(sContext, DB_NAME);
+        sTeamsLocalDataSource = TeamsLocalDataSource.getInstance(sContext, DB_NAME, true);
     }
 
     @Before
     public void setup() {
 
-        mDbHelper = new TeamsDbHelper(sContext, DB_NAME);
+        mDbHelper = new DbHelper(sContext, DB_NAME, true);
     }
 
     // endregion

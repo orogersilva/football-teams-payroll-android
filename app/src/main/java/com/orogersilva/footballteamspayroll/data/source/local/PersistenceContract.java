@@ -6,11 +6,11 @@ import android.provider.BaseColumns;
  * Created by orogersilva on 9/22/2016.
  */
 
-public class TeamsPersistenceContract {
+public class PersistenceContract {
 
     // region CONSTRUCTORS
 
-    private TeamsPersistenceContract() {}
+    private PersistenceContract() {}
 
     // endregion
 

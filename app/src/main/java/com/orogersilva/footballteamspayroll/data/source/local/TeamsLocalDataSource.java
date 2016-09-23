@@ -13,7 +13,7 @@ import com.orogersilva.footballteamspayroll.data.source.TeamsDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.*;
+import static com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.*;
 
 /**
  * Created by orogersilva on 9/22/2016.
@@ -27,15 +27,15 @@ public class TeamsLocalDataSource implements TeamsDataSource {
 
     private static final String DB_NAME = "Teams.sqlite";
 
-    private TeamsDbHelper mDbHelper;
+    private DbHelper mDbHelper;
 
     // endregion
 
     // region CONSTRUCTORS
 
-    private TeamsLocalDataSource(@NonNull Context context, @NonNull String databaseName) {
+    private TeamsLocalDataSource(@NonNull Context context, @NonNull String databaseName, boolean isTesting) {
 
-        mDbHelper = new TeamsDbHelper(context, databaseName);
+        mDbHelper = new DbHelper(context, databaseName, isTesting);
     }
 
     // endregion
@@ -44,14 +44,14 @@ public class TeamsLocalDataSource implements TeamsDataSource {
 
     public static TeamsLocalDataSource getInstance(@NonNull Context context) {
 
-        return getInstance(context, DB_NAME);
+        return getInstance(context, DB_NAME, false);
     }
 
-    public static TeamsLocalDataSource getInstance(@NonNull Context context, @NonNull final String databaseName) {
+    public static TeamsLocalDataSource getInstance(@NonNull Context context, @NonNull final String databaseName, boolean isTesting) {
 
         if (INSTANCE == null) {
 
-            INSTANCE = new TeamsLocalDataSource(context, databaseName);
+            INSTANCE = new TeamsLocalDataSource(context, databaseName, isTesting);
         }
 
         return INSTANCE;

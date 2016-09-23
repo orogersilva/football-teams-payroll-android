@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.*;
+import static com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -36,7 +36,7 @@ public class PlayersLocalDataSourceTest {
     private static Context sContext;
 
     private final static String DB_NAME = "TeamsTest.sqlite";
-    private TeamsDbHelper mDbHelper;
+    private DbHelper mDbHelper;
 
     private static PlayersLocalDataSource sPlayersLocalDataSource;
 
@@ -49,13 +49,13 @@ public class PlayersLocalDataSourceTest {
 
         sContext = InstrumentationRegistry.getTargetContext();
 
-        sPlayersLocalDataSource = PlayersLocalDataSource.getInstance(sContext, DB_NAME);
+        sPlayersLocalDataSource = PlayersLocalDataSource.getInstance(sContext, DB_NAME, true);
     }
 
     @Before
     public void setup() {
 
-        mDbHelper = new TeamsDbHelper(sContext, DB_NAME);
+        mDbHelper = new DbHelper(sContext, DB_NAME, true);
     }
 
     // endregion
