@@ -23,7 +23,7 @@ public class PlayersLocalDataSource implements PlayersDataSource {
 
     private static PlayersLocalDataSource INSTANCE;
 
-    private final String DB_NAME = "Teams.sqlite";
+    private final static String DB_NAME = "Teams.sqlite";
 
     private TeamsDbHelper mDbHelper;
 
@@ -31,9 +31,9 @@ public class PlayersLocalDataSource implements PlayersDataSource {
 
     // region CONSTRUCTORS
 
-    private PlayersLocalDataSource(@NonNull Context context) {
+    private PlayersLocalDataSource(@NonNull Context context, @NonNull String databaseName) {
 
-        mDbHelper = new TeamsDbHelper(context, DB_NAME);
+        mDbHelper = new TeamsDbHelper(context, databaseName);
     }
 
     // endregion
@@ -42,9 +42,14 @@ public class PlayersLocalDataSource implements PlayersDataSource {
 
     public static PlayersLocalDataSource getInstance(@NonNull Context context) {
 
+        return getInstance(context, DB_NAME);
+    }
+
+    public static PlayersLocalDataSource getInstance(@NonNull Context context, @NonNull final String databaaseName) {
+
         if (INSTANCE == null) {
 
-            INSTANCE = new PlayersLocalDataSource(context);
+            INSTANCE = new PlayersLocalDataSource(context, databaaseName);
         }
 
         return INSTANCE;

@@ -29,6 +29,11 @@ public class Player {
 
     // region GETTERS AND SETTERS
 
+    public long getId() {
+
+        return mId;
+    }
+
     public String getName() {
 
         return mName;
