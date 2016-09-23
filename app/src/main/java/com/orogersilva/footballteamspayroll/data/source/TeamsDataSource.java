@@ -22,6 +22,7 @@ public interface TeamsDataSource {
 
     // region CRUD
 
+    void getTeam(long id, LoadTeamsCallback callback);
     void getTeams(LoadTeamsCallback callback);
 
     // endregion

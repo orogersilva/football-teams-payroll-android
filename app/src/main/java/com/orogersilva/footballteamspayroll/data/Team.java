@@ -23,11 +23,13 @@ public class Team implements Comparable<Team> {
 
     // region CONSTRUCTORS
 
+    public Team() {}
+
     public Team(long id, String name, List<Player> players, List<Supporter> supporters) {
 
         mId = id;
-        mName = name;
-        mPlayers = players;
+        setName(name);
+        setPlayers(players);
         mSupporters = supporters;
     }
 
@@ -45,9 +47,19 @@ public class Team implements Comparable<Team> {
         return mName;
     }
 
+    public void setName(String name) {
+
+        mName = name;
+    }
+
     public List<Player> getPlayers() {
 
         return mPlayers;
+    }
+
+    public void setPlayers(List<Player> players) {
+
+        mPlayers = players;
     }
 
     public List<Supporter> getSupporters() {

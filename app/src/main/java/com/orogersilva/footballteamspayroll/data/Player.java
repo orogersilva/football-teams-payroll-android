@@ -17,6 +17,8 @@ public class Player {
 
     // region CONSTRUCTORS
 
+    public Player() {}
+
     public Player(long id, String name, int age, float salary) {
 
         mId = id;

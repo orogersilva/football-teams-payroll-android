@@ -11,6 +11,7 @@ import com.orogersilva.footballteamspayroll.data.Team;
 import com.orogersilva.footballteamspayroll.data.source.TeamsDataSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.orogersilva.footballteamspayroll.data.source.local.PersistenceContract.*;
@@ -60,6 +61,64 @@ public class TeamsLocalDataSource implements TeamsDataSource {
     // endregion
 
     // region OVERRIDED METHODS
+
+    @Override
+    public void getTeam(long id, LoadTeamsCallback callback) {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        String sql = "SELECT t.team_id, t.team_name, p.player_id, p.player_name, p.player_age, p.player_salary " +
+                        "FROM team as t " +
+                        "INNER JOIN team_player_support as tps " +
+                            "ON t.team_id = tps.team_player_support_team_id " +
+                        "INNER JOIN player as p " +
+                            "ON p.player_id = tps.team_player_support_player_id " +
+                        "WHERE t.team_id = ?";
+
+        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(id)});
+
+        Team team = null;
+
+        if (c != null && c.getCount() > 0) {
+
+            long teamId = 0;
+            String teamName = null;
+            List<Player> players = new ArrayList<>();
+            boolean isFirstRow = true;
+
+            while (c.moveToNext()) {
+
+                if (isFirstRow) {
+
+                    teamId = c.getLong(c.getColumnIndex(TeamEntry.COLUMN_NAME_ID));
+                    teamName = c.getString(c.getColumnIndex(TeamEntry.COLUMN_NAME_NAME));
+
+                    isFirstRow = false;
+                }
+
+                long playerId = c.getLong(c.getColumnIndex(PlayerEntry.COLUMN_NAME_ID));
+                String playerName = c.getString(c.getColumnIndex(PlayerEntry.COLUMN_NAME_NAME));
+                int playerAge = c.getInt(c.getColumnIndex(PlayerEntry.COLUMN_NAME_AGE));
+                float playerSalary = c.getFloat(c.getColumnIndex(PlayerEntry.COLUMN_NAME_SALARY));
+
+                Player player = new Player(playerId, playerName, playerAge, playerSalary);
+
+                players.add(player);
+            }
+
+            c.close();
+
+            team = new Team(teamId, teamName, players, new ArrayList<Supporter>());
+        }
+
+        db.close();
+
+        if (team != null) {
+            callback.onTeamsLoaded(Arrays.asList(team));
+        } else {
+            callback.onDataNotAvailable();
+        }
+    }
 
     @Override
     public void getTeams(@NonNull LoadTeamsCallback callback) {
