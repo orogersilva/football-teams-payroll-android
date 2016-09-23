@@ -18,6 +18,7 @@ public interface TeamsContract {
 
         // region METHODS
 
+        void showLoadingIndicator(boolean isActive);
         void showTeams(List<Team> teams);
 
         // endregion

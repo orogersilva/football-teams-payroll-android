@@ -1,12 +1,16 @@
 package com.orogersilva.footballteamspayroll.data;
 
+import android.util.Log;
+
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by orogersilva on 9/22/2016.
  */
 
-public class Team {
+public class Team implements Comparable<Team> {
 
     // region FIELDS
 
@@ -51,6 +55,23 @@ public class Team {
         return mSupporters;
     }
 
+    public float getTotalPayroll() {
+
+        float totalPayroll = 0.0f;
+
+        for (Player player : mPlayers) {
+
+            totalPayroll += player.getSalary();
+        }
+
+        return totalPayroll;
+    }
+
+    public int getNumbersOfSupporters() {
+
+        return mSupporters.size();
+    }
+
     // endregion
 
     // region OVERRIDED METHODS
@@ -67,6 +88,32 @@ public class Team {
                 mPlayers.equals(team.getPlayers()) &&
                 mSupporters.equals(team.getSupporters());
     }
+
+    @Override
+    public int compareTo(Team anotherTeam) {
+
+        Float totalPayrollFloat = new Float(getTotalPayroll());
+        Float anotherTeamPayrollFloat = new Float(anotherTeam.getTotalPayroll());
+
+        return anotherTeamPayrollFloat.compareTo(totalPayrollFloat);
+    }
+
+    // endregion
+
+    // region UTILITY CLASSES
+
+    public static Comparator<Team> NumberOfSupportersComparator = new Comparator<Team>() {
+
+        // region OVERRIDED METHODS
+
+        @Override
+        public int compare(Team team1, Team team2) {
+
+            return team2.getNumbersOfSupporters() - team1.getNumbersOfSupporters();
+        }
+
+        // endregion
+    };
 
     // endregion
 }
