@@ -8,13 +8,31 @@ public class Supporter {
 
     // region FIELDS
 
+    private long mId;
     private String mName;
     private String mRegistrationId;
     private boolean mOverdue;
 
     // endregion
 
+    // region CONSTRUCTORS
+
+    public Supporter(long id, String name, String registrationId, boolean isOverdue) {
+
+        mId = id;
+        mName = name;
+        mRegistrationId = registrationId;
+        mOverdue = isOverdue;
+    }
+
+    // endregion
+
     // region GETTERS AND SETTERS
+
+    public long getId() {
+
+        return mId;
+    }
 
     public String getName() {
 

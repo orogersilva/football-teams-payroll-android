@@ -10,13 +10,31 @@ public class Team {
 
     // region FIELDS
 
+    private long mId;
     private String mName;
     private List<Player> mPlayers;
     private List<Supporter> mSupporters;
 
     // endregion
 
+    // region CONSTRUCTORS
+
+    public Team(long id, String name, List<Player> players, List<Supporter> supporters) {
+
+        mId = id;
+        mName = name;
+        mPlayers = players;
+        mSupporters = supporters;
+    }
+
+    // endregion
+
     // region GETTERS AND SETTERS
+
+    public long getId() {
+
+        return mId;
+    }
 
     public String getName() {
 

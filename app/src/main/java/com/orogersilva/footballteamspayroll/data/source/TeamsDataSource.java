@@ -15,6 +15,7 @@ public interface TeamsDataSource {
     interface LoadTeamsCallback {
 
         void onTeamsLoaded(List<Team> teams);
+        void onDataNotAvailable();
     }
 
     // endregion

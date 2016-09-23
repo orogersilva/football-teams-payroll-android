@@ -17,9 +17,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.orogersilva.footballteamspayroll.data.source.local.TeamsPersistenceContract.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -90,7 +92,7 @@ public class PlayersLocalDataSourceTest {
     }
 
     @Test
-    public void getPlayers_whenExistsPlayers_onTeamsLoadedIsSuccessful() {
+    public void getPlayers_whenExistsPlayers_onPlayersLoadedIsSuccessful() {
 
         // ARRANGE
 
@@ -132,6 +134,9 @@ public class PlayersLocalDataSourceTest {
 
         db.close();
 
+
+        final List<Player> expectedPlayers = Arrays.asList(player1, player2);
+
         PlayersDataSource.LoadPlayersCallback callback = new PlayersDataSource.LoadPlayersCallback() {
 
             @Override
@@ -139,7 +144,7 @@ public class PlayersLocalDataSourceTest {
 
                 // ASSERT
 
-                return;
+                assertEquals(expectedPlayers, players);
             }
 
             @Override
